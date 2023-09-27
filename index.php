@@ -1,40 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=PT+Sans:ital,wght@1,400;1,700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+	<title>LOGIN</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
 <body>
-    <form action="login.php" method="post">
-        <div class="header">
-            <h1 class="login">LOGIN PAGE</h1>
-        </div>
+     <form action="login.php" method="post">
+     	<h2>LOGIN</h2>
+     	<?php if (isset($_GET['error'])) { ?>
+     		<p class="error"><?php echo $_GET['error']; ?></p>
+     	<?php } ?>
+     	<label>User Name</label>
+     	<input type="text" name="uname" placeholder="User Name"><br>
 
-        <div class="container">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+     	<label>User Name</label>
+     	<input type="password" name="password" placeholder="Password"><br>
 
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-
-            <button type="submit">Login</button>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-        </div>
-
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-        </div>
-    </form>
+     	<button type="submit">Login</button>
+     </form>
 </body>
-
 </html>
