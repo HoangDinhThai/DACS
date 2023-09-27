@@ -6,15 +6,27 @@
 }
 
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   border: 0;
 }
 
 /* Bordered form */
+body {
+  background-color: #1690a7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 form {
-  border: 1px solid #f1f1f1;
-  margin: 20px 20% 0 20%;
+  background-color: #fff;
+  width: 500px;
+  border: 2px solid #ccc;
+  padding: 30px;
+  border-radius: 15px;
 }
 
 .container > label {
@@ -25,12 +37,6 @@ form {
 }
 
 .container > input {
-  font-size: var(--font-size);
-  font-family: var(--font-family);
-  font-style: var(--font-style);
-}
-
-.container > button {
   font-size: var(--font-size);
   font-family: var(--font-family);
   font-style: var(--font-style);
@@ -82,6 +88,9 @@ button {
   border: none;
   cursor: pointer;
   width: 100%;
+  font-size: var(--font-size);
+  font-family: var(--font-family);
+  font-style: var(--font-style);
 }
 
 /* Add a hover effect for buttons */
@@ -100,12 +109,6 @@ button:hover {
 .imgcontainer {
   text-align: center;
   margin: 24px 0 12px 0;
-}
-
-/* Avatar image */
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
 }
 
 /* Add padding to containers */

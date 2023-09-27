@@ -1,40 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+session_reset();
+include "db_conn.php";
+if (isset($_POST['uname']) && isset($_POST['password'])) {
+    function validate($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=PT+Sans:ital,wght@1,400;1,700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-</head>
+    $uname = validate($_POST['uname']);
+    $pass = validate($_POST['password']);
 
-<body>
-    <form action="action_page.php" method="post">
-        <div class="header">
-            <h1 class="login">LOGIN PAGE</h1>
-        </div>
+    if (empty($uname)) {
+        header("Location: index.php?error=User name is required");
+        exit();
+    } else if (empty($pass)) {
+        header("Location: index.php?error=Password is required");
+        exit();
+    } else {
+        $sql = "SELECT * FROM users WHERE users_name = '$uname' AND password = '$pass'";
 
-        <div class="container">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+        $result = mysqli_query($conn, $sql);
 
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+        if (mysqli_num_rows($result) === 1) {
+            $row = mysqli_fetch_assoc($result);
 
-            <button type="submit">Login</button>
-            <label>
-                <input type="checkbox" checked="checked" name="remember"> Remember me
-            </label>
-        </div>
-
-        <div class="container" style="background-color:#f1f1f1">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
-        </div>
-    </form>
-</body>
-
-</html>
+            if ($row['user_name'] === $uname && $row['password'] === $pass) {
+                $_SESSION['user_name'] = $row['user_name'];
+                $_SESSION['name'] = $row['name'];
+                $_SESSION['id'] = $row['id'];
+                header("Location: home.php");
+                exit();
+            } else {
+            }
+        }
+    }
+} else {
+    header("Location: login.php");
+    exit();
+}
